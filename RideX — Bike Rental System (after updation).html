@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///C:/Users/nitya/Downloads/RideX___Bike_Rental_System.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RideX — Bike Rental System</title>
+<link href="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/css2" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--s1:#111118;--s2:#1a1a24;--s3:#22222f;--ac:#ff3c3c;--ac2:#ff7b00;--tx:#f0f0f5;--mu:#7a7a9a;--bd:rgba(255,255,255,.07);--gr:#00e676;--bl:#2979ff;--tr:.28s cubic-bezier(.4,0,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:4px}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+/* Real-time input highlight */
+.fi:invalid{border-color:rgba(255,60,60,.4)}
+.fi.valid-input{border-color:rgba(0,230,118,.5);box-shadow:0 0 0 3px rgba(0,230,118,.08)}
+/* Hint text under inputs */
+.hint{font-size:.75rem;color:var(--mu);margin-top:5px;padding-left:2px}
+.hint.ok{color:var(--gr)}
+.hint.bad{color:var(--ac)}
+.pg{display:none;min-height:100vh;animation:fi .35s ease}.pg.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+nav{position:fixed;inset:0 0 auto;z-index:999;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(10,10,15,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--bd)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:3px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+.nl{display:flex;gap:6px;align-items:center}
+.nl button{background:none;border:none;color:var(--mu);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;padding:8px 14px;border-radius:8px;transition:var(--tr)}
+.nl button:hover,.nl button.hi{color:var(--tx);background:var(--s2)}
+.admbtn{background:var(--ac)!important;color:#fff!important;border-radius:8px!important}
+.nav-r{display:flex;align-items:center;gap:10px}
+.ava{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;cursor:pointer}
+.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;position:relative;overflow:hidden}
+.auth::before{content:'';position:absolute;top:-30%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,60,60,.07),transparent 70%);pointer-events:none}
+.abox{background:var(--s1);border:1px solid var(--bd);border-radius:22px;width:100%;max-width:440px;padding:40px;position:relative;z-index:1}
+.alogo{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:4px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:6px}
+.asub{text-align:center;color:var(--mu);font-size:.88rem;margin-bottom:32px}
+.divr{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--mu);font-size:.8rem}
+.divr::before,.divr::after{content:'';flex:1;height:1px;background:var(--bd)}
+.sw{text-align:center;margin-top:20px;color:var(--mu);font-size:.88rem}
+.sw a{color:var(--ac);cursor:pointer;font-weight:600}
+.err{background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.25);color:var(--ac);padding:10px 14px;border-radius:8px;font-size:.83rem;margin-bottom:14px;display:none}
+.suc{background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.25);color:var(--gr);padding:10px 14px;border-radius:8px;font-size:.83rem;margin-bottom:14px;display:none}
+.fg{margin-bottom:16px}
+.fl{display:block;font-size:.82rem;font-weight:600;color:var(--mu);margin-bottom:7px;letter-spacing:.5px}
+.fi,.fs{width:100%;background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:11px 14px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.93rem;outline:none;transition:var(--tr)}
+.fi:focus,.fs:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(255,60,60,.1)}
+.fi::placeholder{color:var(--mu)}.fs option{background:var(--s2)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bp{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:none;padding:13px 28px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.97rem;font-weight:700;cursor:pointer;transition:var(--tr)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(255,60,60,.32)}
+.bs{background:var(--s2);color:var(--tx);border:1px solid var(--bd);padding:13px 28px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.97rem;font-weight:600;cursor:pointer;transition:var(--tr)}
+.bs:hover{background:var(--s3);transform:translateY(-2px)}
+.hero{padding:120px 28px 70px;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.22);color:var(--ac);padding:5px 14px;border-radius:100px;font-size:.78rem;font-weight:600;letter-spacing:1px;margin-bottom:18px}
+.dot{width:6px;height:6px;background:var(--ac);border-radius:50%;animation:pu 1.8s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.3;transform:scale(.6)}}
+h1.big{font-family:'Bebas Neue',sans-serif;font-size:5.2rem;line-height:.95;letter-spacing:2px;margin-bottom:22px}
+h1.big span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--mu);font-size:1.05rem;line-height:1.7;margin-bottom:32px}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:10px;margin-top:36px}
+.sb2{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:18px 22px;flex:1;text-align:center}
+.sbn{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--ac)}
+.sbl{color:var(--mu);font-size:.78rem;margin-top:2px}
+.hcard{background:var(--s1);border:1px solid var(--bd);border-radius:22px;padding:26px;overflow:hidden;position:relative}
+.hcard::before{content:'';position:absolute;top:-40%;left:-40%;width:180%;height:180%;background:radial-gradient(circle,rgba(255,60,60,.05),transparent 70%)}
+.hcard img{width:100%;height:210px;object-fit:cover;border-radius:12px;margin-bottom:14px;display:block;position:relative;z-index:1}
+.sec{padding:72px 28px;max-width:1160px;margin:0 auto}
+.stag{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--ac);letter-spacing:3px;margin-bottom:10px}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:2px;margin-bottom:44px}
+.stitle span{color:var(--ac)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;text-align:center;position:relative;overflow:hidden;transition:var(--tr)}
+.step:hover{transform:translateY(-4px);border-color:rgba(255,60,60,.22)}
+.stn{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:rgba(255,255,255,.04);position:absolute;top:12px;right:16px}
+.sti{font-size:2.4rem;margin-bottom:14px}
+.step h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;margin-bottom:9px}
+.step p{color:var(--mu);font-size:.88rem;line-height:1.6}
+.fbar{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.fb{background:var(--s1);border:1px solid var(--bd);color:var(--mu);padding:7px 18px;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.85rem;cursor:pointer;transition:var(--tr)}
+.fb:hover,.fb.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.bcard{background:var(--s1);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:var(--tr)}
+.bcard:hover{transform:translateY(-5px);border-color:rgba(255,60,60,.28);box-shadow:0 18px 54px rgba(255,60,60,.1)}
+/* Image area */
+.biw{position:relative;height:195px;overflow:hidden;background:var(--s2)}
+.biw img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.bcard:hover .biw img{transform:scale(1.06)}
+/* Shimmer loading effect */
+.shimmer{position:absolute;inset:0;background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);background-size:200%;animation:sh 1.4s infinite;z-index:0}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* Emoji fallback - only if image truly fails */
+.efb{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--s2),var(--s3));z-index:2}
+.efb .em{font-size:3.8rem}
+.efb span{font-size:.7rem;color:var(--mu);font-family:'Space Mono',monospace;letter-spacing:1px;text-align:center;padding:0 12px}
+.bdg{position:absolute;top:10px;left:10px;padding:3px 11px;border-radius:100px;font-size:.73rem;font-weight:700;z-index:3}
+.avl{background:rgba(0,230,118,.14);border:1px solid rgba(0,230,118,.28);color:var(--gr)}
+.navl{background:rgba(255,60,60,.14);border:1px solid rgba(255,60,60,.28);color:var(--ac)}
+.ctag{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);color:var(--mu);padding:3px 10px;border-radius:100px;font-size:.7rem;z-index:3}
+.cbody{padding:18px}
+.cname{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:6px}
+.cspecs{display:flex;gap:14px;margin-bottom:12px}
+.csp{color:var(--mu);font-size:.78rem}
+.cfoot{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--bd)}
+.cprice{font-family:'Space Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--ac)}
+.cprice small{color:var(--mu);font-size:.73rem;font-weight:400;font-family:'Outfit',sans-serif}
+.bbook{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:none;padding:9px 20px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:var(--tr)}
+.bbook:hover{transform:scale(1.05)}
+.bbook:disabled{background:var(--s3);color:var(--mu);cursor:not-allowed;transform:none}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center;padding:16px}
+.ov.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--bd);border-radius:22px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;animation:mi .28s cubic-bezier(.4,0,.2,1)}
+@keyframes mi{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:none}}
+.mhdr{padding:26px 26px 0;display:flex;align-items:center;justify-content:space-between}
+.mtit{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:1px}
+.mcl{background:var(--s2);border:none;color:var(--mu);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:var(--tr)}
+.mcl:hover{background:var(--ac);color:#fff}
+.mbody{padding:22px 26px 26px}
+.mprev{display:flex;gap:14px;background:var(--s2);border-radius:12px;padding:14px;margin-bottom:20px;align-items:center}
+.mprev img{width:105px;height:70px;object-fit:cover;border-radius:9px;background:var(--s3);flex-shrink:0}
+.mn{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px}
+.msp{color:var(--mu);font-size:.83rem;margin-top:3px}
+.mpr{color:var(--ac);font-family:'Space Mono',monospace;font-weight:700;margin-top:5px}
+.sumbox{background:var(--s2);border-radius:11px;padding:14px;margin:18px 0}
+.sr{display:flex;justify-content:space-between;padding:5px 0;font-size:.88rem;color:var(--mu)}
+.sr.tot{color:var(--tx);font-weight:700;border-top:1px solid var(--bd);padding-top:11px;margin-top:5px}
+.sr.tot .amt{color:var(--ac);font-family:'Space Mono',monospace}
+.bklist{display:flex;flex-direction:column;gap:14px}
+.bki{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:18px;transition:var(--tr)}
+.bki:hover{border-color:rgba(255,60,60,.18)}
+.bkth{width:85px;height:58px;border-radius:9px;object-fit:cover;flex-shrink:0;background:var(--s2)}
+.bkin{flex:1}.bkin h4{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:1px;margin-bottom:4px}
+.bkm{display:flex;gap:14px;color:var(--mu);font-size:.8rem;flex-wrap:wrap}
+.bkact{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.sb{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:.73rem;font-weight:700}
+.sa{background:rgba(0,230,118,.12);color:var(--gr)}.sp{background:rgba(255,123,0,.12);color:var(--ac2)}.sc{background:rgba(41,121,255,.12);color:var(--bl)}.sx{background:rgba(255,60,60,.12);color:var(--ac)}
+.prof-s{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:26px;margin-bottom:18px}
+.pav{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:1.9rem;font-weight:700;margin-bottom:14px}
+.adml{display:grid;grid-template-columns:250px 1fr;min-height:100vh;padding-top:64px}
+.sidebar{background:var(--s1);border-right:1px solid var(--bd);padding:24px 14px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
+.slbl{font-size:.7rem;font-weight:700;color:var(--mu);letter-spacing:2px;padding:0 10px;margin-bottom:7px}
+.sitem{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;cursor:pointer;color:var(--mu);font-size:.88rem;font-weight:500;transition:var(--tr);margin-bottom:2px}
+.sitem:hover{background:var(--s2);color:var(--tx)}.sitem.on{background:rgba(255,60,60,.11);color:var(--ac);font-weight:600}
+.sic{font-size:1rem;width:20px;text-align:center}
+.sbdg{margin-left:auto;background:var(--ac);color:#fff;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:100px}
+.admbody{padding:36px;overflow-y:auto}
+.admhdr{margin-bottom:32px}.admhdr h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:2px}.admhdr p{color:var(--mu);font-size:.88rem;margin-top:3px}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:32px}
+.scard{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:22px;position:relative;overflow:hidden;transition:var(--tr)}
+.scard:hover{transform:translateY(-2px)}
+.scard::before{content:'';position:absolute;top:0;right:0;width:70px;height:70px;border-radius:50%;opacity:.07;transform:translate(18px,-18px)}
+.scard:nth-child(1)::before{background:var(--ac)}.scard:nth-child(2)::before{background:var(--gr)}.scard:nth-child(3)::before{background:var(--bl)}.scard:nth-child(4)::before{background:var(--ac2)}
+.sci{font-size:1.7rem;margin-bottom:14px}.scn{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1}.scl{color:var(--mu);font-size:.82rem;margin-top:5px}.scc{font-size:.75rem;margin-top:7px}.cup{color:var(--gr)}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px}
+.cc{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:22px}
+.cct{font-weight:700;font-size:.92rem;margin-bottom:18px}
+.barchart{display:flex;align-items:flex-end;gap:7px;height:110px}
+.bw2{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{background:linear-gradient(to top,var(--ac),var(--ac2));border-radius:3px 3px 0 0;width:100%}
+.barlbl{font-size:.65rem;color:var(--mu)}
+.dnut{display:flex;align-items:center;justify-content:center;gap:18px}
+.leg{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--mu)}
+.ld{width:9px;height:9px;border-radius:50%}
+.tc{background:var(--s1);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.tch{padding:18px 22px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.tct{font-weight:700;font-size:.95rem}
+table{width:100%;border-collapse:collapse}
+th{padding:12px 18px;text-align:left;font-size:.75rem;font-weight:700;color:var(--mu);letter-spacing:1px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,.02)}
+td{padding:13px 18px;border-bottom:1px solid var(--bd);font-size:.85rem;color:var(--mu)}
+td:first-child{color:var(--tx);font-weight:500}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
+.ab{background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:5px 11px;border-radius:6px;font-size:.76rem;cursor:pointer;transition:var(--tr);font-family:'Outfit',sans-serif}
+.ab:hover{background:var(--ac);border-color:var(--ac);color:#fff}
+.tabd{display:none}.tabd.on{display:block}
+.addform{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:26px;margin-bottom:22px}
+.addform h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:22px}
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px 20px;box-shadow:0 16px 50px rgba(0,0,0,.55);min-width:250px;display:none;align-items:center;gap:11px}
+.toast.show{display:flex;animation:toa .28s ease}
+@keyframes toa{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media(max-width:880px){.hero{grid-template-columns:1fr;padding-top:90px}.hero>div:last-child{display:none}h1.big{font-size:3.4rem}.steps{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}.adml{grid-template-columns:1fr}.sidebar{display:none}.charts{grid-template-columns:1fr}.fr{grid-template-columns:1fr}}
+@media(max-width:560px){nav{padding:0 14px}.hero{padding:80px 14px 40px}h1.big{font-size:2.7rem}.sec{padding:52px 14px}.admbody{padding:18px}.sgrid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="toast" id="T"><span id="Ti">✅</span><span id="Tm" style="font-size:.88rem;font-weight:500">Welcome, Arjun! 🏍️</span></div>
+
+<nav id="NAV" style="display: flex;">
+  <div class="logo" onclick="go(&#39;home&#39;)">RIDEX</div>
+  <div class="nl" id="NL">
+    <button onclick="go(&#39;home&#39;)" id="n-home" class="">Home</button>
+    <button onclick="go(&#39;bikes&#39;)" id="n-bikes" class="">Bikes</button>
+    <button onclick="go(&#39;mybk&#39;)" id="n-mybk" class="">My Bookings</button>
+  </div>
+  <div class="nav-r">
+    <div class="ava" id="AV" onclick="go(&#39;profile&#39;)">A</div>
+    <button style="background:none;border:none;color:var(--mu);cursor:pointer;font-family:Outfit,sans-serif;font-size:.85rem" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div class="pg on" id="pg-login">
+  <div class="auth">
+    <div class="abox">
+      <div class="alogo">RIDEX</div>
+      <div class="asub">Premium Bike Rentals · Ride Your Way</div>
+      <div class="err" id="le">Invalid credentials.</div>
+      <div class="err" id="le-email" style="display:none">Please enter a valid email address.</div>
+      <div class="err" id="le-pass" style="display:none">Password cannot be empty.</div>
+      <div class="fg"><label class="fl">EMAIL</label><input class="fi" type="email" id="lem" placeholder="you@example.com"></div>
+      <div class="fg"><label class="fl">PASSWORD</label><input class="fi" type="password" id="lpw" placeholder="••••••••" onkeydown="if(event.key===&#39;Enter&#39;)doLogin_form()"></div>
+      <button class="bp" style="width:100%;margin-top:6px" onclick="doLogin_form()">Sign In →</button>
+      <div class="divr">or try a demo</div>
+      <button class="bs" style="width:100%;margin-bottom:10px" onclick="demoLogin(&#39;admin&#39;)">🛡️ Admin Demo</button>
+      <button class="bs" style="width:100%" onclick="demoLogin(&#39;user&#39;)">👤 User Demo</button>
+      <div class="sw">No account? <a onclick="go(&#39;register&#39;)">Register here</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="pg" id="pg-register">
+  <div class="auth">
+    <div class="abox">
+      <div class="alogo">RIDEX</div>
+      <div class="asub">Create your account</div>
+      <div class="err" id="re">Please fill all fields.</div>
+      <div class="err" id="re-fn" style="display:none">First name must be at least 2 characters.</div>
+      <div class="err" id="re-ln" style="display:none">Last name must be at least 2 characters.</div>
+      <div class="err" id="re-em" style="display:none">Please enter a valid email (e.g. you@example.com).</div>
+      <div class="err" id="re-ph" style="display:none">Phone must be exactly 10 digits.</div>
+      <div class="err" id="re-pw" style="display:none">Password must be at least 8 characters.</div>
+      <div class="err" id="re-lic" style="display:none">License format invalid (e.g. DL-1234567890).</div>
+      <div class="err" id="re-dup" style="display:none">This email is already registered.</div>
+      <div class="suc" id="rs">Account created! Redirecting…</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">FIRST NAME</label><input class="fi" id="rfn" placeholder="Arjun"></div>
+        <div class="fg"><label class="fl">LAST NAME</label><input class="fi" id="rln" placeholder="Sharma"></div>
+      </div>
+      <div class="fg"><label class="fl">EMAIL</label><input class="fi" type="email" id="rem" placeholder="you@example.com" oninput="checkEmail(this,&#39;hint-em&#39;)">
+        <div class="hint" id="hint-em">Enter a valid email like you@gmail.com</div>
+      </div>
+      <div class="fg"><label class="fl">PHONE</label><input class="fi" type="tel" id="rph" placeholder="+91 98765 43210" oninput="checkPhone(this)">
+        <div class="hint" id="hint-ph">Enter 10-digit mobile number starting with 6, 7, 8 or 9</div>
+      </div>
+      <div class="fg"><label class="fl">PASSWORD</label><input class="fi" type="password" id="rpw" placeholder="Min 8 characters" oninput="checkPassword(this)">
+        <div class="hint" id="hint-pw">Min 8 characters with at least 1 letter and 1 number</div>
+      </div>
+      <div class="fg"><label class="fl">LICENSE NUMBER</label><input class="fi" id="rlic" placeholder="DL-1234567890" oninput="checkLicense(this)">
+        <div class="hint" id="hint-lic">Format: XX-1234567890 (State code + dash + number)</div>
+      </div>
+      <button class="bp" style="width:100%;margin-top:6px" onclick="doReg()">Create Account →</button>
+      <div class="sw">Already registered? <a onclick="go(&#39;login&#39;)">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="pg" id="pg-home">
+  <div class="hero">
+    <div>
+      <div class="tag"><span class="dot"></span>INDIA'S #1 BIKE RENTAL PLATFORM</div>
+      <h1 class="big">RIDE <span>FREE,</span><br>RIDE FAST.</h1>
+      <p class="sub">Experience the thrill of premium motorcycles at unbeatable prices. Book in 60 seconds, ride in style.</p>
+      <div class="hbtns">
+        <button class="bp" onclick="go(&#39;bikes&#39;)">Browse Bikes →</button>
+        <button class="bs" onclick="document.getElementById(&#39;hiw&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">How it works</button>
+      </div>
+      <div class="stats">
+        <div class="sb2"><div class="sbn">500+</div><div class="sbl">Happy Riders</div></div>
+        <div class="sb2"><div class="sbn">24</div><div class="sbl">Premium Bikes</div></div>
+        <div class="sb2"><div class="sbn">4.9★</div><div class="sbl">Avg Rating</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="hcard">
+        <img id="hero-img" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Royal_Enfield_Classic_350_(2017_Model_Year).jpg" alt="Royal Enfield Classic 350" style="width:100%;height:210px;object-fit:cover;border-radius:12px;margin-bottom:14px;display:block;position:relative;z-index:1">
+        <div style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:1.45rem;letter-spacing:1px;position:relative;z-index:1">Royal Enfield Classic 350</div>
+        <div style="color:var(--mu);font-size:.83rem;margin-top:3px;position:relative;z-index:1">349cc · 20.2 BHP · 5-Speed</div>
+        <div style="color:var(--ac);font-family:&#39;Space Mono&#39;,monospace;font-size:1.05rem;margin-top:7px;font-weight:700;position:relative;z-index:1">₹799<span style="color:var(--mu);font-size:.73rem;font-weight:400;font-family:Outfit,sans-serif"> /day</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="hiw">
+    <div class="stag">// THE PROCESS</div>
+    <div class="stitle">HOW IT <span>WORKS</span></div>
+    <div class="steps">
+      <div class="step"><div class="stn">01</div><div class="sti">🔍</div><h3>Browse &amp; Choose</h3><p>Explore our fleet. Filter by category, price, or engine size to find your perfect ride.</p></div>
+      <div class="step"><div class="stn">02</div><div class="sti">📅</div><h3>Book Instantly</h3><p>Select your dates and confirm in under 60 seconds. No paperwork, no hassle.</p></div>
+      <div class="step"><div class="stn">03</div><div class="sti">🏍️</div><h3>Ride &amp; Return</h3><p>Pick up your bike, ride wherever the road takes you, return at our location.</p></div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="stag">// FLEET</div>
+    <div class="stitle">FEATURED <span>RIDES</span></div>
+    <div class="bgrid" id="home-grid">
+<div class="bcard" data-cat="cruiser">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="1" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Royal_Enfield_Classic_350_(2017_Model_Year).jpg" alt="Royal Enfield Classic 350" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🛣️</div>
+      <span>ROYAL ENFIELD CLASSIC 350</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">CRUISER</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Royal Enfield Classic 350</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 349cc</div>
+      <div class="csp">⚡ 20.2 BHP</div>
+      <div class="csp">🚀 114 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹799 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(1)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="naked">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="2" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Ktm_duke_390.jpg" alt="KTM 390 Duke" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🔥</div>
+      <span>KTM 390 DUKE</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">NAKED</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">KTM 390 Duke</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 373cc</div>
+      <div class="csp">⚡ 43 BHP</div>
+      <div class="csp">🚀 167 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹999 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(2)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="naked">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="3" src="./RideX — Bike Rental System (after updation)_files/2018_Yamaha_MT-15.jpg" alt="Yamaha MT-15 V2" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: none;">
+    <div class="efb" style="display: flex;">
+      <div class="em">🔥</div>
+      <span>YAMAHA MT-15 V2</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">NAKED</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Yamaha MT-15 V2</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 155cc</div>
+      <div class="csp">⚡ 18.5 BHP</div>
+      <div class="csp">🚀 137 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹599 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(3)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div></div>
+    <div style="text-align:center;margin-top:32px"><button class="bs" onclick="go(&#39;bikes&#39;)">View All Bikes →</button></div>
+  </div>
+</div>
+
+<!-- ALL BIKES -->
+<div class="pg" id="pg-bikes">
+  <div class="sec" style="padding-top:90px">
+    <div class="stag">// OUR FLEET</div>
+    <div class="stitle" style="margin-bottom:20px">ALL <span>BIKES</span></div>
+    <div class="fbar">
+      <button class="fb on" onclick="filterB(&#39;all&#39;,this)">All Bikes</button>
+      <button class="fb" onclick="filterB(&#39;cruiser&#39;,this)">🛣️ Cruiser</button>
+      <button class="fb" onclick="filterB(&#39;sport&#39;,this)">⚡ Sport</button>
+      <button class="fb" onclick="filterB(&#39;naked&#39;,this)">🔥 Naked</button>
+      <button class="fb" onclick="filterB(&#39;adventure&#39;,this)">🏔️ Adventure</button>
+      <button class="fb" onclick="filterB(&#39;supersport&#39;,this)">🚀 Supersport</button>
+    </div>
+    <div class="bgrid" id="all-grid">
+<div class="bcard" data-cat="cruiser">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="1" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Royal_Enfield_Classic_350_(2017_Model_Year).jpg" alt="Royal Enfield Classic 350" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🛣️</div>
+      <span>ROYAL ENFIELD CLASSIC 350</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">CRUISER</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Royal Enfield Classic 350</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 349cc</div>
+      <div class="csp">⚡ 20.2 BHP</div>
+      <div class="csp">🚀 114 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹799 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(1)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="naked">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="2" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Ktm_duke_390.jpg" alt="KTM 390 Duke" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🔥</div>
+      <span>KTM 390 DUKE</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">NAKED</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">KTM 390 Duke</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 373cc</div>
+      <div class="csp">⚡ 43 BHP</div>
+      <div class="csp">🚀 167 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹999 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(2)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="naked">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="3" src="./RideX — Bike Rental System (after updation)_files/2018_Yamaha_MT-15.jpg" alt="Yamaha MT-15 V2" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: none;">
+    <div class="efb" style="display: flex;">
+      <div class="em">🔥</div>
+      <span>YAMAHA MT-15 V2</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">NAKED</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Yamaha MT-15 V2</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 155cc</div>
+      <div class="csp">⚡ 18.5 BHP</div>
+      <div class="csp">🚀 137 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹599 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(3)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="naked">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="4" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Bajaj_Pulsar_200_NS.jpg" alt="Bajaj Pulsar NS200" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🔥</div>
+      <span>BAJAJ PULSAR NS200</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">NAKED</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Bajaj Pulsar NS200</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 199cc</div>
+      <div class="csp">⚡ 24.5 BHP</div>
+      <div class="csp">🚀 136 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹699 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(4)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="sport">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="5" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/2023_Honda_CBR650R_E-Clutch.jpg" alt="Honda CBR650R" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">⚡</div>
+      <span>HONDA CBR650R</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">SPORT</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Honda CBR650R</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 649cc</div>
+      <div class="csp">⚡ 94 BHP</div>
+      <div class="csp">🚀 215 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹1,499 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(5)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="supersport">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="6" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Kwasaki_ZX-10R_tokyo.JPG" alt="Kawasaki Ninja ZX-10R" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🚀</div>
+      <span>KAWASAKI NINJA ZX-10R</span>
+    </div>
+    <div class="bdg navl">✗ Booked</div>
+    <div class="ctag">SUPERSPORT</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Kawasaki Ninja ZX-10R</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 998cc</div>
+      <div class="csp">⚡ 210 BHP</div>
+      <div class="csp">🚀 299 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹2,999 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(6)" disabled="">
+        Unavailable
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="adventure">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="7" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Royal_Enfield_Himalyana_DB2K5445.jpg" alt="Royal Enfield Himalayan" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🏔️</div>
+      <span>ROYAL ENFIELD HIMALAYAN</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">ADVENTURE</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Royal Enfield Himalayan</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 411cc</div>
+      <div class="csp">⚡ 24.3 BHP</div>
+      <div class="csp">🚀 130 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹899 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(7)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bcard" data-cat="naked">
+  <div class="biw">
+    <div class="shimmer" style="display: none;"></div>
+    <img data-bikeid="8" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Ducati_Monster_S4R_S_Tricolore_2008.jpg" alt="Ducati Monster 821" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">🔥</div>
+      <span>DUCATI MONSTER 821</span>
+    </div>
+    <div class="bdg avl">✓ Available</div>
+    <div class="ctag">NAKED</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">Ducati Monster 821</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ 821cc</div>
+      <div class="csp">⚡ 109 BHP</div>
+      <div class="csp">🚀 230 km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹2,499 <small>/day</small></div>
+      <button class="bbook" onclick="openBk(8)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<!-- MY BOOKINGS -->
+<div class="pg" id="pg-mybk">
+  <div class="sec" style="padding-top:90px">
+    <div class="stag">// MY RIDES</div>
+    <div class="stitle">MY <span>BOOKINGS</span></div>
+    <div class="bklist" id="mybk-list"><div class="bki">
+      <img class="bkth" data-bikeid="3" src="./RideX — Bike Rental System (after updation)_files/2018_Yamaha_MT-15.jpg" alt="Yamaha MT-15 V2" onerror="this.style.visibility=&#39;hidden&#39;" style="visibility: hidden; display: none;">
+      <div class="bkin">
+        <h4>Yamaha MT-15 V2</h4>
+        <div class="bkm"><span>📋 BK004</span><span>📅 2025-06-01→2025-06-04</span><span>📍 Goa — Panaji</span><span>💰 ₹2,196</span></div>
+      </div>
+      <div class="bkact">
+        <div class="sb sp">Pending</div>
+        <button class="ab" onclick="cancelBk(&#39;BK004&#39;)">Cancel</button>
+      </div>
+    </div><div class="bki">
+      <img class="bkth" data-bikeid="2" src="file:///C:/Users/nitya/Downloads/RideX%20%E2%80%94%20Bike%20Rental%20System_files/Ktm_duke_390.jpg" alt="KTM 390 Duke" onerror="this.style.visibility=&#39;hidden&#39;" style="visibility: hidden;">
+      <div class="bkin">
+        <h4>KTM 390 Duke</h4>
+        <div class="bkm"><span>📋 BK001</span><span>📅 2025-03-10→2025-03-12</span><span>📍 Delhi — Connaught Place</span><span>💰 ₹2,397</span></div>
+      </div>
+      <div class="bkact">
+        <div class="sb sc">Completed</div>
+        
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="pg" id="pg-profile">
+  <div class="sec" style="padding-top:90px;max-width:680px">
+    <div class="stag">// ACCOUNT</div>
+    <div class="stitle">MY <span>PROFILE</span></div>
+    <div class="prof-s">
+      <div class="pav" id="pav">U</div>
+      <h2 id="pname" style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:1.9rem;letter-spacing:1px"></h2>
+      <p id="pemail" style="color:var(--mu);margin-top:3px"></p>
+      <p id="pphone" style="color:var(--mu);font-size:.88rem;margin-top:2px"></p>
+    </div>
+    <div class="prof-s">
+      <h3 style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:1.3rem;letter-spacing:1px;margin-bottom:18px">UPDATE PROFILE</h3>
+      <div class="fr">
+        <div class="fg"><label class="fl">FIRST NAME</label><input class="fi" id="pfn"></div>
+        <div class="fg"><label class="fl">LAST NAME</label><input class="fi" id="pln"></div>
+      </div>
+      <div class="fg"><label class="fl">PHONE</label><input class="fi" id="pph"></div>
+      <button class="bp" onclick="saveProf()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="pg" id="pg-admin">
+  <div class="adml">
+    <div class="sidebar">
+      <div style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:1.7rem;letter-spacing:3px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;padding:0 10px;margin-bottom:24px">RIDEX</div>
+      <div class="slbl">MAIN</div>
+      <div class="sitem on" onclick="atab(&#39;overview&#39;,this)"><span class="sic">📊</span>Overview</div>
+      <div class="sitem" onclick="atab(&#39;bookings&#39;,this)"><span class="sic">📋</span>Bookings<span class="sbdg" id="pbdg">3</span></div>
+      <div class="sitem" onclick="atab(&#39;bikes&#39;,this)"><span class="sic">🏍️</span>Manage Bikes</div>
+      <div class="sitem" onclick="atab(&#39;users&#39;,this)"><span class="sic">👥</span>Users</div>
+      <div class="slbl" style="margin-top:18px">ACCOUNT</div>
+      <div class="sitem" onclick="logout()"><span class="sic">🚪</span>Logout</div>
+    </div>
+    <div class="admbody">
+      <div class="tabd on" id="t-overview">
+        <div class="admhdr"><h2>DASHBOARD</h2><p>Welcome back, Admin · <span id="adate"></span></p></div>
+        <div class="sgrid">
+          <div class="scard"><div class="sci">💰</div><div class="scn" id="s-rev">₹0</div><div class="scl">Revenue</div><div class="scc cup">↑ 18% this month</div></div>
+          <div class="scard"><div class="sci">📋</div><div class="scn" id="s-bks">0</div><div class="scl">Bookings</div><div class="scc cup">↑ 12% this month</div></div>
+          <div class="scard"><div class="sci">🏍️</div><div class="scn" id="s-bikes">0</div><div class="scl">Bikes</div><div class="scc">Fleet active</div></div>
+          <div class="scard"><div class="sci">👥</div><div class="scn" id="s-users">0</div><div class="scl">Users</div><div class="scc cup">↑ 5 this week</div></div>
+        </div>
+        <div class="charts">
+          <div class="cc"><div class="cct">📈 Revenue — Last 7 Days</div><div class="barchart" id="rch"></div></div>
+          <div class="cc"><div class="cct">🏍️ Bookings by Category</div>
+            <div class="dnut">
+              <svg width="120" height="120" viewBox="0 0 42 42">
+                <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="var(--ac)" stroke-width="5" stroke-dasharray="35 65" stroke-dashoffset="25"></circle>
+                <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="var(--ac2)" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="-10"></circle>
+                <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="var(--gr)" stroke-width="5" stroke-dasharray="20 80" stroke-dashoffset="-35"></circle>
+                <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="var(--bl)" stroke-width="5" stroke-dasharray="20 80" stroke-dashoffset="-55"></circle>
+              </svg>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div class="leg"><div class="ld" style="background:var(--ac)"></div>Sport 35%</div>
+                <div class="leg"><div class="ld" style="background:var(--ac2)"></div>Naked 25%</div>
+                <div class="leg"><div class="ld" style="background:var(--gr)"></div>Cruiser 20%</div>
+                <div class="leg"><div class="ld" style="background:var(--bl)"></div>Adventure 20%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tc"><div class="tch"><div class="tct">Recent Bookings</div></div>
+          <table><thead><tr><th>ID</th><th>CUSTOMER</th><th>BIKE</th><th>DATES</th><th>AMOUNT</th><th>STATUS</th></tr></thead>
+          <tbody id="rec-bk"></tbody></table>
+        </div>
+      </div>
+      <div class="tabd" id="t-bookings">
+        <div class="admhdr"><h2>ALL BOOKINGS</h2><p>Manage and update statuses</p></div>
+        <div class="tc">
+          <div class="tch"><div class="tct">Bookings</div>
+            <select class="fs" style="width:auto;padding:7px 12px" onchange="renderAllBkT(this.value)">
+              <option value="all">All</option><option value="pending">Pending</option><option value="active">Active</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>CUSTOMER</th><th>BIKE</th><th>START</th><th>END</th><th>DAYS</th><th>TOTAL</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+          <tbody id="all-bkt"></tbody></table></div>
+        </div>
+      </div>
+      <div class="tabd" id="t-bikes">
+        <div class="admhdr"><h2>MANAGE BIKES</h2><p>Add, edit or remove bikes</p></div>
+        <div class="addform">
+          <h3>+ ADD NEW BIKE</h3>
+          <div class="fr">
+            <div class="fg"><label class="fl">BIKE NAME</label><input class="fi" id="nb-n" placeholder="KTM 390 Duke"></div>
+            <div class="fg"><label class="fl">CATEGORY</label>
+              <select class="fs" id="nb-c"><option value="naked">Naked</option><option value="sport">Sport</option><option value="cruiser">Cruiser</option><option value="adventure">Adventure</option><option value="supersport">Supersport</option></select>
+            </div>
+          </div>
+          <div class="fr">
+            <div class="fg"><label class="fl">ENGINE (cc)</label><input class="fi" id="nb-e" placeholder="373"></div>
+            <div class="fg"><label class="fl">PRICE (₹/day)</label><input class="fi" type="number" id="nb-p" placeholder="999"></div>
+          </div>
+          <div class="fg"><label class="fl">IMAGE URL</label><input class="fi" id="nb-i" placeholder="https://..."></div>
+          <div class="fr">
+            <div class="fg"><label class="fl">POWER (BHP)</label><input class="fi" id="nb-pw" placeholder="43"></div>
+            <div class="fg"><label class="fl">TOP SPEED (km/h)</label><input class="fi" id="nb-s" placeholder="167"></div>
+          </div>
+          <button class="bp" onclick="addBike()">Add to Fleet</button>
+        </div>
+        <div class="tc"><div class="tch"><div class="tct">Fleet</div></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>BIKE</th><th>CAT</th><th>ENGINE</th><th>₹/DAY</th><th>STATUS</th><th>TRIPS</th><th>ACTIONS</th></tr></thead>
+          <tbody id="adm-bikes"></tbody></table></div>
+        </div>
+      </div>
+      <div class="tabd" id="t-users">
+        <div class="admhdr"><h2>USER MANAGEMENT</h2><p>All registered users</p></div>
+        <div class="tc"><div class="tch"><div class="tct">Users</div></div>
+          <table><thead><tr><th>NAME</th><th>EMAIL</th><th>PHONE</th><th>JOINED</th><th>BOOKINGS</th><th>STATUS</th></tr></thead>
+          <tbody id="adm-users"></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="ov" id="bk-ov">
+  <div class="modal">
+    <div class="mhdr"><div class="mtit">BOOK YOUR RIDE</div><button class="mcl" onclick="closeBk()">✕</button></div>
+    <div class="mbody">
+      <div class="mprev">
+        <img id="m-img" src="./RideX — Bike Rental System (after updation)_files/bike_rental_system_5.html" alt="bike" onerror="this.style.display=&#39;none&#39;" style="display: none;">
+        <div>
+          <div class="mn" id="m-name">Bike</div>
+          <div class="msp" id="m-spec">Specs</div>
+          <div class="mpr" id="m-price">₹/day</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">PICKUP DATE</label><input class="fi" type="date" id="bks" onchange="calcT()"></div>
+        <div class="fg"><label class="fl">RETURN DATE</label><input class="fi" type="date" id="bke" onchange="calcT()"></div>
+      </div>
+      <div class="fg"><label class="fl">PICKUP LOCATION</label>
+        <select class="fs" id="bkloc">
+          <option>Delhi — Connaught Place</option><option>Mumbai — Andheri West</option>
+          <option>Bangalore — Koramangala</option><option>Hyderabad — Banjara Hills</option><option>Goa — Panaji</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">NOTES</label><input class="fi" id="bkn" placeholder="Helmet, riding gear, etc."></div>
+      <div class="sumbox">
+        <div class="sr"><span>Rental</span><span id="s-r">₹0</span></div>
+        <div class="sr"><span>Duration</span><span id="s-d">0 days</span></div>
+        <div class="sr"><span>Insurance</span><span>₹150/day</span></div>
+        <div class="sr"><span>Platform Fee</span><span>₹99</span></div>
+        <div class="sr tot"><span>TOTAL</span><span class="amt" id="s-t">₹0</span></div>
+      </div>
+      <button class="bp" style="width:100%" onclick="confirmBk()">Confirm Booking →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   IMAGE STRATEGY — Wikipedia REST API (pageimages endpoint)
+   Fetches the actual lead image used on each bike's Wikipedia page.
+   This is the most reliable method — Wikipedia always has these images
+   and serves them with no hotlink restrictions.
+   API: https://en.wikipedia.org/api/rest_v1/page/summary/{title}
+   Returns: thumbnail.source — a real CDN image URL, always works.
+═══════════════════════════════════════════════════════════════════ */
+
+// Fetch image from Wikipedia summary API and inject into all matching <img> tags
+async function loadWikiImage(wikiTitle, imgIds) {
+  try {
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const src = data?.originalimage?.source || data?.thumbnail?.source;
+    if (!src) return;
+    imgIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.src = src;
+        // Hide shimmer when loaded
+        const shimmer = el.previousElementSibling;
+        if (shimmer && shimmer.classList.contains('shimmer')) shimmer.style.display = 'none';
+      }
+    });
+    // Also set on any img with matching data-wiki attribute
+    document.querySelectorAll(`img[data-wiki="${wikiTitle}"]`).forEach(el => {
+      el.src = src;
+      const shimmer = el.previousElementSibling;
+      if (shimmer && shimmer.classList.contains('shimmer')) shimmer.style.display = 'none';
+    });
+  } catch(e) {
+    console.warn('Wiki image load failed for:', wikiTitle);
+  }
+}
+
+/* ── BIKE DATABASE ── */
+/* wikiTitle = exact Wikipedia article title for this bike
+   All images are fetched live from Wikipedia's REST API */
+const BIKES = [
+  {
+    id:1, name:'Royal Enfield Classic 350', cat:'cruiser',
+    eng:'349cc', pwr:'20.2 BHP', spd:'114', price:799, avail:true, trips:24, em:'🛣️',
+    wiki:'Royal Enfield Classic'
+  },
+  {
+    id:2, name:'KTM 390 Duke', cat:'naked',
+    eng:'373cc', pwr:'43 BHP', spd:'167', price:999, avail:true, trips:31, em:'🔥',
+    wiki:'KTM 390 series'
+  },
+  {
+    id:3, name:'Yamaha MT-15 V2', cat:'naked',
+    eng:'155cc', pwr:'18.5 BHP', spd:'137', price:599, avail:true, trips:18, em:'🔥',
+    wiki:'Yamaha MT-15'
+  },
+  {
+    id:4, name:'Bajaj Pulsar NS200', cat:'naked',
+    eng:'199cc', pwr:'24.5 BHP', spd:'136', price:699, avail:true, trips:22, em:'🔥',
+    wiki:'Bajaj Pulsar NS200'
+  },
+  {
+    id:5, name:'Honda CBR650R', cat:'sport',
+    eng:'649cc', pwr:'94 BHP', spd:'215', price:1499, avail:true, trips:12, em:'⚡',
+    wiki:'Honda CBR650R'
+  },
+  {
+    id:6, name:'Kawasaki Ninja ZX-10R', cat:'supersport',
+    eng:'998cc', pwr:'210 BHP', spd:'299', price:2999, avail:false, trips:8, em:'🚀',
+    wiki:'Kawasaki Ninja ZX-10R'
+  },
+  {
+    id:7, name:'Royal Enfield Himalayan', cat:'adventure',
+    eng:'411cc', pwr:'24.3 BHP', spd:'130', price:899, avail:true, trips:19, em:'🏔️',
+    wiki:'Royal Enfield Himalayan'
+  },
+  {
+    id:8, name:'Ducati Monster 821', cat:'naked',
+    eng:'821cc', pwr:'109 BHP', spd:'230', price:2499, avail:true, trips:6, em:'🔥',
+    wiki:'Ducati Monster'
+  }
+];
+
+/* ── USERS ── */
+const USERS = [
+  {id:1,fn:'Admin',ln:'User',em:'admin@ridex.in',pw:'admin123',ph:'+91 98765 00001',lic:'ADMIN001',role:'admin',joined:'2024-01-15',active:true},
+  {id:2,fn:'Arjun',ln:'Sharma',em:'arjun@gmail.com',pw:'user123',ph:'+91 98765 43210',lic:'DL-MH-1234567',role:'user',joined:'2024-03-10',active:true},
+  {id:3,fn:'Priya',ln:'Verma',em:'priya@gmail.com',pw:'user123',ph:'+91 91234 56789',lic:'DL-DL-9876543',role:'user',joined:'2024-04-22',active:true},
+  {id:4,fn:'Rahul',ln:'Singh',em:'rahul@gmail.com',pw:'user123',ph:'+91 87654 32109',lic:'DL-KA-5432167',role:'user',joined:'2024-05-01',active:true}
+];
+let BOOKINGS=[
+  {id:'BK001',uid:2,bid:2,s:'2025-03-10',e:'2025-03-12',days:2,total:2397,status:'completed',loc:'Delhi — Connaught Place',note:''},
+  {id:'BK002',uid:3,bid:1,s:'2025-04-01',e:'2025-04-03',days:2,total:1897,status:'completed',loc:'Mumbai — Andheri West',note:''},
+  {id:'BK003',uid:4,bid:5,s:'2025-05-15',e:'2025-05-17',days:2,total:3297,status:'active',loc:'Bangalore — Koramangala',note:''},
+  {id:'BK004',uid:2,bid:3,s:'2025-06-01',e:'2025-06-04',days:3,total:2196,status:'pending',loc:'Goa — Panaji',note:''},
+  {id:'BK005',uid:3,bid:4,s:'2025-06-10',e:'2025-06-11',days:1,total:1048,status:'pending',loc:'Hyderabad — Banjara Hills',note:''},
+  {id:'BK006',uid:4,bid:7,s:'2025-06-20',e:'2025-06-25',days:5,total:4844,status:'pending',loc:'Delhi — Connaught Place',note:'Gear'}
+];
+let nnbk=7; let CU=null,SEL=null;
+
+// Cache: wiki title -> image URL
+const imgCache = {};
+
+// Fetch a Wikipedia image URL and apply it everywhere that bike appears
+async function fetchAndApplyBikeImage(bike) {
+  if (imgCache[bike.wiki]) {
+    applyBikeImage(bike, imgCache[bike.wiki]);
+    return;
+  }
+  try {
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(bike.wiki)}`);
+    const data = await res.json();
+    const src = data?.originalimage?.source || data?.thumbnail?.source;
+    if (src) {
+      imgCache[bike.wiki] = src;
+      applyBikeImage(bike, src);
+    }
+  } catch(e) {}
+}
+
+function applyBikeImage(bike, src) {
+  // Apply to all card images for this bike
+  document.querySelectorAll(`img[data-bikeid="${bike.id}"]`).forEach(img => {
+    img.src = src;
+    img.onload = () => {
+      const shimmer = img.previousElementSibling;
+      if (shimmer && shimmer.classList.contains('shimmer')) shimmer.style.display = 'none';
+    };
+    img.onerror = () => {
+      img.style.display = 'none';
+      const efb = img.nextElementSibling;
+      if (efb && efb.classList.contains('efb')) efb.style.display = 'flex';
+    };
+  });
+  // Apply to hero
+  if (bike.id === 1) {
+    const h = document.getElementById('hero-img');
+    if (h) h.src = src;
+  }
+}
+
+// Load all bike images
+function loadAllImages() {
+  BIKES.forEach(b => fetchAndApplyBikeImage(b));
+}
+
+/* ── ROUTING ── */
+function go(p){
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  document.getElementById('pg-'+p).classList.add('on');
+  window.scrollTo(0,0);
+  ['home','bikes','mybk'].forEach(k=>document.getElementById('n-'+k)?.classList.remove('hi'));
+  if(['home','bikes','mybk'].includes(p))document.getElementById('n-'+p)?.classList.add('hi');
+  if(p==='mybk')renderMyBk();
+  if(p==='profile')renderProf();
+  if(p==='admin')renderAdmin();
+  // Reload images after rendering new cards
+  setTimeout(loadAllImages, 50);
+}
+
+/* ── AUTH ── */
+function doLogin_form(){
+  // Hide all previous errors
+  ['le','le-email','le-pass'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+
+  const em = val('lem');
+  const pw = val('lpw');
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!em || !emailRegex.test(em)){
+    showErr('le-email','Please enter a valid email address.');
+    shakeInput('lem'); return;
+  }
+
+  // Validate password not empty
+  if(!pw){
+    showErr('le-pass','Password cannot be empty.');
+    shakeInput('lpw'); return;
+  }
+
+  // Check credentials
+  const u=USERS.find(x=>x.em===em&&x.pw===pw);
+  if(!u){
+    showErr('le','Invalid email or password. Please try again.');
+    shakeInput('lem'); shakeInput('lpw'); return;
+  }
+  startSession(u);
+}
+function demoLogin(role){startSession(USERS.find(u=>u.role===role));}
+function startSession(u){
+  CU=u;
+  document.getElementById('NAV').style.display='flex';
+  document.getElementById('AV').textContent=u.fn[0];
+  if(u.role==='admin'&&!document.getElementById('nadm')){
+    const b=document.createElement('button');
+    b.id='nadm';b.textContent='🛡️ Admin';b.className='admbtn';
+    b.onclick=()=>go('admin');
+    document.getElementById('NL').appendChild(b);
+  }
+  renderHomeGrid();
+  renderAllGrid();
+  go('home');
+  toast('✅','Welcome, '+u.fn+'! 🏍️');
+}
+function doReg(){
+  // Hide all errors first
+  ['re','re-fn','re-ln','re-em','re-ph','re-pw','re-lic','re-dup'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+
+  const fn  = val('rfn');
+  const ln  = val('rln');
+  const em  = val('rem');
+  const ph  = val('rph').replace(/\s+/g,'');  // remove spaces
+  const pw  = val('rpw');
+  const lic = val('rlic');
+
+  let hasError = false;
+
+  // First Name — min 2 chars, letters only
+  if(!fn || fn.length < 2 || !/^[a-zA-Z]+$/.test(fn)){
+    showErr('re-fn','First name must be at least 2 letters (no numbers/symbols).');
+    shakeInput('rfn'); hasError=true;
+  }
+
+  // Last Name — min 2 chars, letters only
+  if(!ln || ln.length < 2 || !/^[a-zA-Z]+$/.test(ln)){
+    showErr('re-ln','Last name must be at least 2 letters (no numbers/symbols).');
+    shakeInput('rln'); hasError=true;
+  }
+
+  // Email — must match standard email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!em || !emailRegex.test(em)){
+    showErr('re-em','Enter a valid email address (e.g. you@gmail.com).');
+    shakeInput('rem'); hasError=true;
+  }
+
+  // Phone — must be exactly 10 digits (after removing spaces/+91)
+  const phoneDigits = ph.replace(/^\+91/, '').replace(/^91/, '').replace(/\D/g,'');
+  if(!ph || phoneDigits.length !== 10 || !/^[6-9]/.test(phoneDigits)){
+    showErr('re-ph','Enter a valid 10-digit Indian mobile number (starts with 6-9).');
+    shakeInput('rph'); hasError=true;
+  }
+
+  // Password — min 8 chars, must have letter + number
+  if(!pw || pw.length < 8){
+    showErr('re-pw','Password must be at least 8 characters long.');
+    shakeInput('rpw'); hasError=true;
+  } else if(!/[a-zA-Z]/.test(pw) || !/[0-9]/.test(pw)){
+    showErr('re-pw','Password must contain at least one letter and one number.');
+    shakeInput('rpw'); hasError=true;
+  }
+
+  // License — format like DL-1234567890 or MH-1234567890
+  const licRegex = /^[A-Z]{2}-\d{7,13}$/i;
+  if(!lic || !licRegex.test(lic)){
+    showErr('re-lic','License format invalid. Use format: DL-1234567890');
+    shakeInput('rlic'); hasError=true;
+  }
+
+  if(hasError) return;
+
+  // Duplicate email check
+  if(USERS.find(u=>u.em===em)){
+    showErr('re-dup','This email is already registered. Please sign in.');
+    shakeInput('rem'); return;
+  }
+
+  // All good — create user
+  USERS.push({id:Date.now(),fn,ln,em,pw,ph:phoneDigits,lic,role:'user',joined:td(),active:true});
+  document.getElementById('rs').style.display='block';
+  setTimeout(()=>{document.getElementById('rs').style.display='none';go('login');},1800);
+}
+function logout(){
+  CU=null;
+  document.getElementById('NAV').style.display='none';
+  const a=document.getElementById('nadm');if(a)a.remove();
+  go('login');
+}
+
+/* ── BIKE CARD BUILDER ── */
+function mkCard(b){
+  return `
+<div class="bcard" data-cat="${b.cat}">
+  <div class="biw">
+    <div class="shimmer"></div>
+    <img data-bikeid="${b.id}" src="" alt="${b.name}"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1">
+    <div class="efb">
+      <div class="em">${b.em}</div>
+      <span>${b.name.toUpperCase()}</span>
+    </div>
+    <div class="bdg ${b.avail?'avl':'navl'}">${b.avail?'✓ Available':'✗ Booked'}</div>
+    <div class="ctag">${b.cat.toUpperCase()}</div>
+  </div>
+  <div class="cbody">
+    <div class="cname">${b.name}</div>
+    <div class="cspecs">
+      <div class="csp">⚙️ ${b.eng}</div>
+      <div class="csp">⚡ ${b.pwr}</div>
+      <div class="csp">🚀 ${b.spd} km/h</div>
+    </div>
+    <div class="cfoot">
+      <div class="cprice">₹${b.price.toLocaleString()} <small>/day</small></div>
+      <button class="bbook" onclick="openBk(${b.id})" ${b.avail?'':'disabled'}>
+        ${b.avail?'Book Now':'Unavailable'}
+      </button>
+    </div>
+  </div>
+</div>`;
+}
+
+function renderHomeGrid(){document.getElementById('home-grid').innerHTML=BIKES.slice(0,3).map(mkCard).join('');}
+function renderAllGrid(cat='all'){
+  const list=cat==='all'?BIKES:BIKES.filter(b=>b.cat===cat);
+  document.getElementById('all-grid').innerHTML=list.map(mkCard).join('');
+}
+function filterB(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderAllGrid(cat);
+  setTimeout(loadAllImages,50);
+}
+
+/* ── BOOKING ── */
+function openBk(id){
+  if(!CU){go('login');return;}
+  SEL=BIKES.find(b=>b.id===id);
+  const mi=document.getElementById('m-img');
+  mi.src = imgCache[SEL.wiki] || '';
+  mi.style.display='block';
+  set('m-name',SEL.name);
+  set('m-spec',`${SEL.eng} · ${SEL.pwr} · ${SEL.spd} km/h`);
+  set('m-price',`₹${SEL.price.toLocaleString()}/day`);
+  const t=td();
+  ['bks','bke'].forEach(i=>{const el=document.getElementById(i);el.min=t;el.value='';});
+  calcT();
+  document.getElementById('bk-ov').classList.add('open');
+}
+function closeBk(){document.getElementById('bk-ov').classList.remove('open');SEL=null;}
+function calcT(){
+  const s=val('bks'),e=val('bke');
+  if(!s||!e||!SEL){set('s-r','₹0');set('s-d','0 days');set('s-t','₹0');return;}
+  const days=Math.max(1,Math.ceil((new Date(e)-new Date(s))/86400000));
+  set('s-d',`${days} day${days>1?'s':''}`);
+  set('s-r','₹'+(SEL.price*days).toLocaleString());
+  set('s-t','₹'+(SEL.price*days+150*days+99).toLocaleString());
+}
+function confirmBk(){
+  const s=val('bks'),e=val('bke');
+  if(!s||!e){toast('❌','Please select pickup and return dates');return;}
+  if(new Date(e)<=new Date(s)){toast('❌','Return date must be after pickup');return;}
+  const days=Math.ceil((new Date(e)-new Date(s))/86400000);
+  const bid='BK'+String(nnbk++).padStart(3,'0');
+  BOOKINGS.push({id:bid,uid:CU.id,bid:SEL.id,s,e,days,total:SEL.price*days+150*days+99,status:'pending',loc:val('bkloc'),note:val('bkn')});
+  closeBk();toast('✅',`Booking ${bid} confirmed! 🏍️`);
+}
+
+/* ── MY BOOKINGS ── */
+function renderMyBk(){
+  const el=document.getElementById('mybk-list');
+  const mine=BOOKINGS.filter(b=>b.uid===CU.id);
+  if(!mine.length){el.innerHTML=`<div style="text-align:center;padding:56px;color:var(--mu)"><div style="font-size:3rem;margin-bottom:14px">🏍️</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px">NO BOOKINGS YET</div><button class="bp" style="margin-top:18px" onclick="go('bikes')">Browse Bikes</button></div>`;return;}
+  el.innerHTML=[...mine].reverse().map(b=>{
+    const bike=BIKES.find(x=>x.id===b.bid);
+    const sc={pending:'sp',active:'sa',completed:'sc',cancelled:'sx'}[b.status];
+    const cachedImg = bike ? (imgCache[bike.wiki]||'') : '';
+    return `<div class="bki">
+      <img class="bkth" data-bikeid="${b.bid}" src="${cachedImg}" alt="${bike?.name||''}" onerror="this.style.visibility='hidden'">
+      <div class="bkin">
+        <h4>${bike?.name||'Unknown'}</h4>
+        <div class="bkm"><span>📋 ${b.id}</span><span>📅 ${b.s}→${b.e}</span><span>📍 ${b.loc}</span><span>💰 ₹${b.total.toLocaleString()}</span></div>
+      </div>
+      <div class="bkact">
+        <div class="sb ${sc}">${cap(b.status)}</div>
+        ${b.status==='pending'?`<button class="ab" onclick="cancelBk('${b.id}')">Cancel</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+function cancelBk(id){const b=BOOKINGS.find(x=>x.id===id);if(b)b.status='cancelled';renderMyBk();toast('ℹ️',`Booking ${id} cancelled.`);}
+
+/* ── PROFILE ── */
+function renderProf(){
+  if(!CU)return;
+  document.getElementById('pav').textContent=CU.fn[0];
+  set('pname',CU.fn+' '+CU.ln);set('pemail',CU.em);set('pphone',CU.ph||'No phone');
+  document.getElementById('pfn').value=CU.fn;
+  document.getElementById('pln').value=CU.ln;
+  document.getElementById('pph').value=CU.ph||'';
+}
+function saveProf(){CU.fn=val('pfn');CU.ln=val('pln');CU.ph=val('pph');document.getElementById('AV').textContent=CU.fn[0];renderProf();toast('✅','Profile updated!');}
+
+/* ── ADMIN ── */
+function renderAdmin(){
+  set('adate',new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'}));
+  const rev=BOOKINGS.filter(b=>b.status!=='cancelled').reduce((s,b)=>s+b.total,0);
+  set('s-rev','₹'+rev.toLocaleString());set('s-bks',BOOKINGS.length);set('s-bikes',BIKES.length);set('s-users',USERS.filter(u=>u.role==='user').length);
+  set('pbdg',BOOKINGS.filter(b=>b.status==='pending').length);
+  const vals=[12500,18200,9800,21000,15600,28900,19400],days=['M','T','W','T','F','S','S'],mx=Math.max(...vals);
+  document.getElementById('rch').innerHTML=vals.map((v2,i)=>`<div class="bw2"><div class="bar" style="height:${Math.round((v2/mx)*100)}%" title="₹${v2.toLocaleString()}"></div><div class="barlbl">${days[i]}</div></div>`).join('');
+  document.getElementById('rec-bk').innerHTML=[...BOOKINGS].slice(-5).reverse().map(b=>{
+    const bk=BIKES.find(x=>x.id===b.bid),u=USERS.find(x=>x.id===b.uid);
+    const sc={pending:'sp',active:'sa',completed:'sc',cancelled:'sx'}[b.status];
+    return `<tr><td>${b.id}</td><td>${u?u.fn+' '+u.ln:'?'}</td><td>${bk?.name||'?'}</td><td>${b.s}–${b.e}</td><td>₹${b.total.toLocaleString()}</td><td><span class="sb ${sc}">${cap(b.status)}</span></td></tr>`;
+  }).join('');
+  renderAllBkT();renderAdmBikes();renderAdmUsers();
+}
+function renderAllBkT(f='all'){
+  const list=f==='all'?BOOKINGS:BOOKINGS.filter(b=>b.status===f);
+  document.getElementById('all-bkt').innerHTML=list.map(b=>{
+    const bk=BIKES.find(x=>x.id===b.bid),u=USERS.find(x=>x.id===b.uid);
+    const sc={pending:'sp',active:'sa',completed:'sc',cancelled:'sx'}[b.status];
+    return `<tr><td>${b.id}</td><td>${u?u.fn+' '+u.ln:'?'}</td><td>${bk?.name||'?'}</td><td>${b.s}</td><td>${b.e}</td><td>${b.days}</td><td>₹${b.total.toLocaleString()}</td><td><span class="sb ${sc}">${cap(b.status)}</span></td>
+    <td style="display:flex;gap:5px;flex-wrap:wrap">
+      ${b.status==='pending'?`<button class="ab" onclick="setBk('${b.id}','active')">Activate</button>`:''}
+      ${b.status==='active'?`<button class="ab" onclick="setBk('${b.id}','completed')">Complete</button>`:''}
+      ${!['cancelled','completed'].includes(b.status)?`<button class="ab" onclick="setBk('${b.id}','cancelled')" style="color:var(--ac)">Cancel</button>`:''}
+    </td></tr>`;
+  }).join('');
+}
+function setBk(id,st){const b=BOOKINGS.find(x=>x.id===id);if(b)b.status=st;renderAllBkT();renderAdmin();toast('✅',`${id} → ${st}`);}
+function renderAdmBikes(){
+  document.getElementById('adm-bikes').innerHTML=BIKES.map(b=>`
+    <tr><td>${b.name}</td><td>${b.cat}</td><td>${b.eng}</td><td>₹${b.price.toLocaleString()}</td>
+    <td><span class="sb ${b.avail?'sa':'sx'}">${b.avail?'Available':'Unavailable'}</span></td><td>${b.trips}</td>
+    <td style="display:flex;gap:5px">
+      <button class="ab" onclick="toggleBike(${b.id})">${b.avail?'Disable':'Enable'}</button>
+      <button class="ab" onclick="delBike(${b.id})" style="color:var(--ac)">Delete</button>
+    </td></tr>`).join('');
+}
+function toggleBike(id){const b=BIKES.find(x=>x.id===id);if(b)b.avail=!b.avail;renderAdmBikes();renderHomeGrid();renderAllGrid();setTimeout(loadAllImages,50);toast('ℹ️','Updated.');}
+function delBike(id){if(!confirm('Delete this bike?'))return;const i=BIKES.findIndex(x=>x.id===id);if(i>-1)BIKES.splice(i,1);renderAdmBikes();renderHomeGrid();renderAllGrid();setTimeout(loadAllImages,50);toast('❌','Bike deleted.');}
+function addBike(){
+  const name=val('nb-n'),price=parseInt(val('nb-p'));
+  if(!name||!price){toast('❌','Name and price required.');return;}
+  BIKES.push({id:Date.now(),name,cat:val('nb-c'),eng:(val('nb-e')||'?')+'cc',pwr:(val('nb-pw')||'?')+' BHP',spd:val('nb-s')||'?',price,wiki:name,em:'🏍️',avail:true,trips:0});
+  ['nb-n','nb-e','nb-p','nb-i','nb-pw','nb-s'].forEach(id=>document.getElementById(id).value='');
+  renderAdmBikes();renderHomeGrid();renderAllGrid();setTimeout(loadAllImages,50);toast('✅','Bike added! 🏍️');
+}
+function renderAdmUsers(){
+  document.getElementById('adm-users').innerHTML=USERS.filter(u=>u.role==='user').map(u=>`
+    <tr><td>${u.fn} ${u.ln}</td><td>${u.em}</td><td>${u.ph||'—'}</td><td>${u.joined}</td>
+    <td>${BOOKINGS.filter(b=>b.uid===u.id).length}</td>
+    <td><span class="sb ${u.active?'sa':'sx'}">${u.active?'Active':'Inactive'}</span></td></tr>`).join('');
+}
+function atab(name,el){
+  document.querySelectorAll('.tabd').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.sitem').forEach(s=>s.classList.remove('on'));
+  document.getElementById('t-'+name).classList.add('on');el.classList.add('on');
+}
+
+/* ── UTILS ── */
+const val=id=>document.getElementById(id)?.value?.trim()||'';
+
+// Shake animation for invalid inputs
+function shakeInput(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.animation='none';
+  el.style.borderColor='var(--ac)';
+  el.style.boxShadow='0 0 0 3px rgba(255,60,60,.2)';
+  setTimeout(()=>{
+    el.style.animation='shake 0.4s ease';
+    setTimeout(()=>{
+      el.style.animation='';
+      el.style.borderColor='';
+      el.style.boxShadow='';
+    },400);
+  },10);
+}
+const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const td=()=>new Date().toISOString().slice(0,10);
+function toast(icon,msg){
+  const T=document.getElementById('T');
+  document.getElementById('Ti').textContent=icon;
+  document.getElementById('Tm').textContent=msg;
+  T.classList.add('show');clearTimeout(T._t);
+  T._t=setTimeout(()=>T.classList.remove('show'),3500);
+}
+function showErr(id,msg){const e=document.getElementById(id);if(e){e.textContent=msg;e.style.display='block';setTimeout(()=>e.style.display='none',3500);}}
+
+document.getElementById('bk-ov').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBk();});
+
+/* ── REAL-TIME INPUT VALIDATORS ── */
+function checkPhone(el){
+  const digits = el.value.replace(/[^0-9]/g,'').replace(/^91/,'').replace(/^0/,'');
+  const hint = document.getElementById('hint-ph');
+  if(digits.length === 0){
+    hint.className='hint'; hint.textContent='Enter 10-digit mobile number starting with 6, 7, 8 or 9';
+    el.classList.remove('valid-input'); return;
+  }
+  if(digits.length < 10){
+    hint.className='hint bad'; hint.textContent=`${digits.length}/10 digits entered — keep going!`;
+    el.classList.remove('valid-input');
+  } else if(digits.length === 10 && /^[6-9]/.test(digits)){
+    hint.className='hint ok'; hint.textContent='✓ Valid mobile number';
+    el.classList.add('valid-input');
+  } else {
+    hint.className='hint bad'; hint.textContent='Must be 10 digits starting with 6, 7, 8 or 9';
+    el.classList.remove('valid-input');
+  }
+}
+
+function checkPassword(el){
+  const pw = el.value;
+  const hint = document.getElementById('hint-pw');
+  if(pw.length === 0){
+    hint.className='hint'; hint.textContent='Min 8 characters with at least 1 letter and 1 number';
+    el.classList.remove('valid-input'); return;
+  }
+  const hasLen   = pw.length >= 8;
+  const hasLetter= /[a-zA-Z]/.test(pw);
+  const hasNum   = /[0-9]/.test(pw);
+  if(hasLen && hasLetter && hasNum){
+    hint.className='hint ok'; hint.textContent='✓ Strong password';
+    el.classList.add('valid-input');
+  } else {
+    let msg = [];
+    if(!hasLen)    msg.push(`${pw.length}/8 chars`);
+    if(!hasLetter) msg.push('needs a letter');
+    if(!hasNum)    msg.push('needs a number');
+    hint.className='hint bad'; hint.textContent='✗ ' + msg.join(', ');
+    el.classList.remove('valid-input');
+  }
+}
+
+function checkEmail(el, hintId){
+  const em = el.value.trim();
+  const hint = document.getElementById(hintId);
+  if(!hint) return;
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+  if(em.length === 0){
+    hint.className='hint'; hint.textContent='Enter a valid email like you@gmail.com';
+    el.classList.remove('valid-input');
+  } else if(valid){
+    hint.className='hint ok'; hint.textContent='✓ Valid email address';
+    el.classList.add('valid-input');
+  } else {
+    hint.className='hint bad'; hint.textContent='✗ Invalid email — must contain @ and domain';
+    el.classList.remove('valid-input');
+  }
+}
+
+function checkLicense(el){
+  const lic = el.value.trim().toUpperCase();
+  const hint = document.getElementById('hint-lic');
+  const valid = /^[A-Z]{2}-\d{7,13}$/.test(lic);
+  if(lic.length === 0){
+    hint.className='hint'; hint.textContent='Format: XX-1234567890 (State code + dash + number)';
+    el.classList.remove('valid-input');
+  } else if(valid){
+    hint.className='hint ok'; hint.textContent='✓ Valid license number';
+    el.classList.add('valid-input');
+  } else {
+    hint.className='hint bad'; hint.textContent='✗ Format: DL-1234567890 or MH-9876543210';
+    el.classList.remove('valid-input');
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBk();});
+go('login');
+</script>
+
+
+</body></html>
